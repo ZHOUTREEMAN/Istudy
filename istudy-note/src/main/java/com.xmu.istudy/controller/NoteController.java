@@ -134,7 +134,7 @@ public class NoteController {
                                   @RequestParam(defaultValue = "10") Integer limit)
     {
 
-        return ResponseUtil.ok(noteService.queryAllByLimit(page,limit));
+        return ResponseUtil.ok(noteService.queryAllByLimit((page-1)*limit,limit));
     }
 
     /**

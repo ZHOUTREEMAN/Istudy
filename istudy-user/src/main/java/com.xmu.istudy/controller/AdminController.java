@@ -85,7 +85,7 @@ public class AdminController {
     {
         if(JwtUtils.ifauthz(request,"admin"))
         {
-            return ResponseUtil.ok(adminService.queryAllByLimit(page,limit));
+            return ResponseUtil.ok(adminService.queryAllByLimit((page-1)*limit,limit));
         }
         else
         {

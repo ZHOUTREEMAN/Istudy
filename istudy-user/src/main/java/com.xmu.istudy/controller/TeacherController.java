@@ -85,7 +85,7 @@ public class TeacherController {
     {
         if(JwtUtils.ifauthz(request,"admin"))
         {
-            return ResponseUtil.ok(teacherService.queryAllByLimit(page,limit));
+            return ResponseUtil.ok(teacherService.queryAllByLimit((page-1)*limit,limit));
         }
         else
         {

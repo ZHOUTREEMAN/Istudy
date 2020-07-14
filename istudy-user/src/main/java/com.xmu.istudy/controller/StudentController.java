@@ -86,7 +86,7 @@ public class StudentController {
     {
         if(JwtUtils.ifauthz(request,"teacher")||JwtUtils.ifauthz(request,"admin"))
         {
-            return ResponseUtil.ok(studentService.queryAllByLimit(page,limit));
+            return ResponseUtil.ok(studentService.queryAllByLimit((page-1)*limit,limit));
         }
         else
         {
