@@ -1,0 +1,27 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: istudy-user
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-2zeg6o1co491qvdu8jo.mysql.rds.aliyuncs.com:3306/istudy
+    username: aliroot
+    password: Istudy900
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 124.70.67.2:8848
+
+mybatis:
+  #domain对象的包
+  type-aliases-package: com.xmu.istudy.entity
+  #mapper.xml所在的位置
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #自动将SQL中查出来的带下划线的字段，转换为驼峰标志，再去匹配类中的属性
+    map-underscore-to-camel-case: true
+jwt:
+  config:
+    key: userlogin
+    failureTime: 3600000

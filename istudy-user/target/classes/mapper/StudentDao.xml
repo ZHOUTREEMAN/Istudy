@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmu.istudy.dao.StudentDao">
+
+    <resultMap type="Student" id="StudentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="studentNo" column="student_no" jdbcType="INTEGER"/>
+        <result property="studentName" column="student_name" jdbcType="VARCHAR"/>
+        <result property="studentPassword" column="student_password" jdbcType="VARCHAR"/>
+        <result property="studentPhone" column="student_phone" jdbcType="VARCHAR"/>
+        <result property="studentGender" column="student_gender" jdbcType="OTHER"/>
+        <result property="studentEmail" column="student_email" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="OTHER"/>
+        <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentMap">
+        select
+          id, student_no, student_name, student_password, student_phone, student_gender, student_email, status, last_update_time
+        from istudy.student
+        where student_no = #{id}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByName" resultMap="StudentMap">
+        select
+          id, student_no, student_name, student_password, student_phone, student_gender, student_email, status, last_update_time
+        from istudy.student
+        where student_name = #{name}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByEmail" resultMap="StudentMap">
+        select
+          id, student_no, student_name, student_password, student_phone, student_gender, student_email, status, last_update_time
+        from istudy.student
+        where student_email = #{email}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentMap">
+        select
+          id, student_no, student_name, student_password, student_phone, student_gender, student_email, status, last_update_time
+        from istudy.student
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StudentMap">
+        select
+          id, student_no, student_name, student_password, student_phone, student_gender, student_email, status, last_update_time
+        from istudy.student
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="studentNo != null">
+                and student_no = #{studentNo}
+            </if>
+            <if test="studentName != null and studentName != ''">
+                and student_name = #{studentName}
+            </if>
+            <if test="studentPassword != null and studentPassword != ''">
+                and student_password = #{studentPassword}
+            </if>
+            <if test="studentPhone != null and studentPhone != ''">
+                and student_phone = #{studentPhone}
+            </if>
+            <if test="studentGender != null">
+                and student_gender = #{studentGender}
+            </if>
+            <if test="studentEmail != null and studentEmail != ''">
+                and student_email = #{studentEmail}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="lastUpdateTime != null">
+                and last_update_time = #{lastUpdateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into istudy.student(student_no, student_name, student_password, student_phone, student_gender, student_email, status, last_update_time)
+        values (#{studentNo}, #{studentName}, #{studentPassword}, #{studentPhone}, #{studentGender}, #{studentEmail}, #{status}, #{lastUpdateTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update istudy.student
+        <set>
+            <if test="studentNo != null">
+                student_no = #{studentNo},
+            </if>
+            <if test="studentName != null and studentName != ''">
+                student_name = #{studentName},
+            </if>
+            <if test="studentPassword != null and studentPassword != ''">
+                student_password = #{studentPassword},
+            </if>
+            <if test="studentPhone != null and studentPhone != ''">
+                student_phone = #{studentPhone},
+            </if>
+            <if test="studentGender != null">
+                student_gender = #{studentGender},
+            </if>
+            <if test="studentEmail != null and studentEmail != ''">
+                student_email = #{studentEmail},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from istudy.student where id = #{id}
+    </delete>
+
+</mapper>

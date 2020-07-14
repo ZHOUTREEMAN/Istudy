@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmu.istudy.dao.AdminDao">
+
+    <resultMap type="Admin" id="AdminMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="adminNo" column="admin_no" jdbcType="INTEGER"/>
+        <result property="adminName" column="admin_name" jdbcType="VARCHAR"/>
+        <result property="adminPassword" column="admin_password" jdbcType="VARCHAR"/>
+        <result property="adminPhone" column="admin_phone" jdbcType="VARCHAR"/>
+        <result property="adminGender" column="admin_gender" jdbcType="OTHER"/>
+        <result property="adminEmail" column="admin_email" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="OTHER"/>
+        <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AdminMap">
+        select
+          id, admin_no, admin_name, admin_password, admin_phone, admin_gender, admin_email, status, last_update_time
+        from istudy.admin
+        where admin_no = #{id}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByName" resultMap="AdminMap">
+        select
+          id, admin_no, admin_name, admin_password, admin_phone, admin_gender, admin_email, status, last_update_time
+        from istudy.admin
+        where admin_name = #{name}
+    </select>
+    <!--查询单个-->
+    <select id="queryByEmail" resultMap="AdminMap">
+        select
+          id, admin_no, admin_name, admin_password, admin_phone, admin_gender, admin_email, status, last_update_time
+        from istudy.admin
+        where admin_email = #{email}
+    </select>
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AdminMap">
+        select
+          id, admin_no, admin_name, admin_password, admin_phone, admin_gender, admin_email, status, last_update_time
+        from istudy.admin
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="AdminMap">
+        select
+          id, admin_no, admin_name, admin_password, admin_phone, admin_gender, admin_email, status, last_update_time
+        from istudy.admin
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="adminNo != null">
+                and admin_no = #{adminNo}
+            </if>
+            <if test="adminName != null and adminName != ''">
+                and admin_name = #{adminName}
+            </if>
+            <if test="adminPassword != null and adminPassword != ''">
+                and admin_password = #{adminPassword}
+            </if>
+            <if test="adminPhone != null and adminPhone != ''">
+                and admin_phone = #{adminPhone}
+            </if>
+            <if test="adminGender != null">
+                and admin_gender = #{adminGender}
+            </if>
+            <if test="adminEmail != null and adminEmail != ''">
+                and admin_email = #{adminEmail}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="lastUpdateTime != null">
+                and last_update_time = #{lastUpdateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into istudy.admin(admin_no, admin_name, admin_password, admin_phone, admin_gender, admin_email, status, last_update_time)
+        values (#{adminNo}, #{adminName}, #{adminPassword}, #{adminPhone}, #{adminGender}, #{adminEmail}, #{status}, #{lastUpdateTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update istudy.admin
+        <set>
+            <if test="adminNo != null">
+                admin_no = #{adminNo},
+            </if>
+            <if test="adminName != null and adminName != ''">
+                admin_name = #{adminName},
+            </if>
+            <if test="adminPassword != null and adminPassword != ''">
+                admin_password = #{adminPassword},
+            </if>
+            <if test="adminPhone != null and adminPhone != ''">
+                admin_phone = #{adminPhone},
+            </if>
+            <if test="adminGender != null">
+                admin_gender = #{adminGender},
+            </if>
+            <if test="adminEmail != null and adminEmail != ''">
+                admin_email = #{adminEmail},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from istudy.admin where id = #{id}
+    </delete>
+
+</mapper>

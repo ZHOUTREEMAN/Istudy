@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmu.istudy.dao.TeacherDao">
+
+    <resultMap type="Teacher" id="TeacherMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="teacherNo" column="teacher_no" jdbcType="INTEGER"/>
+        <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+        <result property="teacherPassword" column="teacher_password" jdbcType="VARCHAR"/>
+        <result property="teacherPhone" column="teacher_phone" jdbcType="VARCHAR"/>
+        <result property="teacherGender" column="teacher_gender" jdbcType="OTHER"/>
+        <result property="teacherEmail" column="teacher_email" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="OTHER"/>
+        <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TeacherMap">
+        select
+          id, teacher_no, teacher_name, teacher_password, teacher_phone, teacher_gender, teacher_email, status, last_update_time
+        from istudy.teacher
+        where teacher_no = #{id}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByName" resultMap="TeacherMap">
+        select
+          id, teacher_no, teacher_name, teacher_password, teacher_phone, teacher_gender, teacher_email, status, last_update_time
+        from istudy.teacher
+        where teacher_name = #{name}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByEmail" resultMap="TeacherMap">
+        select
+          id, teacher_no, teacher_name, teacher_password, teacher_phone, teacher_gender, teacher_email, status, last_update_time
+        from istudy.teacher
+        where teacher_email = #{email}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TeacherMap">
+        select
+          id, teacher_no, teacher_name, teacher_password, teacher_phone, teacher_gender, teacher_email, status, last_update_time
+        from istudy.teacher
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TeacherMap">
+        select
+          id, teacher_no, teacher_name, teacher_password, teacher_phone, teacher_gender, teacher_email, status, last_update_time
+        from istudy.teacher
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="teacherNo != null">
+                and teacher_no = #{teacherNo}
+            </if>
+            <if test="teacherName != null and teacherName != ''">
+                and teacher_name = #{teacherName}
+            </if>
+            <if test="teacherPassword != null and teacherPassword != ''">
+                and teacher_password = #{teacherPassword}
+            </if>
+            <if test="teacherPhone != null and teacherPhone != ''">
+                and teacher_phone = #{teacherPhone}
+            </if>
+            <if test="teacherGender != null">
+                and teacher_gender = #{teacherGender}
+            </if>
+            <if test="teacherEmail != null and teacherEmail != ''">
+                and teacher_email = #{teacherEmail}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="lastUpdateTime != null">
+                and last_update_time = #{lastUpdateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into istudy.teacher(teacher_no, teacher_name, teacher_password, teacher_phone, teacher_gender, teacher_email, status, last_update_time)
+        values (#{teacherNo}, #{teacherName}, #{teacherPassword}, #{teacherPhone}, #{teacherGender}, #{teacherEmail}, #{status}, #{lastUpdateTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update istudy.teacher
+        <set>
+            <if test="teacherNo != null">
+                teacher_no = #{teacherNo},
+            </if>
+            <if test="teacherName != null and teacherName != ''">
+                teacher_name = #{teacherName},
+            </if>
+            <if test="teacherPassword != null and teacherPassword != ''">
+                teacher_password = #{teacherPassword},
+            </if>
+            <if test="teacherPhone != null and teacherPhone != ''">
+                teacher_phone = #{teacherPhone},
+            </if>
+            <if test="teacherGender != null">
+                teacher_gender = #{teacherGender},
+            </if>
+            <if test="teacherEmail != null and teacherEmail != ''">
+                teacher_email = #{teacherEmail},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time = #{lastUpdateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from istudy.teacher where id = #{id}
+    </delete>
+
+</mapper>

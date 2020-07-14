@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/IStudy.iml" filepath="$PROJECT_DIR$/IStudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/istudy-common/istudy-common.iml" filepath="$PROJECT_DIR$/istudy-common/istudy-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/istudy-gateway/istudy-gateway.iml" filepath="$PROJECT_DIR$/istudy-gateway/istudy-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/istudy-note/istudy-note.iml" filepath="$PROJECT_DIR$/istudy-note/istudy-note.iml" />
+      <module fileurl="file://$PROJECT_DIR$/istudy-reservation/istudy-reservation.iml" filepath="$PROJECT_DIR$/istudy-reservation/istudy-reservation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/istudy-room/istudy-room.iml" filepath="$PROJECT_DIR$/istudy-room/istudy-room.iml" />
+      <module fileurl="file://$PROJECT_DIR$/istudy-security/istudy-security.iml" filepath="$PROJECT_DIR$/istudy-security/istudy-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/istudy-user/istudy-user.iml" filepath="$PROJECT_DIR$/istudy-user/istudy-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nacos-test/nacos-test.iml" filepath="$PROJECT_DIR$/nacos-test/nacos-test.iml" />
+    </modules>
+  </component>
+</project>

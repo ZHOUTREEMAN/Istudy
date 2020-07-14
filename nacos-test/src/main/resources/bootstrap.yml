@@ -1,0 +1,13 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: nacos-test
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: 44a03465-b9b5-4a27-a371-2be3bfd47278
+        group: DEFAULT_GROUP
