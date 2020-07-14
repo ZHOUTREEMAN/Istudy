@@ -66,7 +66,7 @@ public class StudentServiceImpl implements StudentService {
     public Student update(Student student) {
         student.setLastUpdateTime(new Date());
         this.studentDao.update(student);
-        return this.queryById(student.getId());
+        return this.queryById(student.getStudentNo());
     }
 
     /**

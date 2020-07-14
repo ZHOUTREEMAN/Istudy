@@ -19,7 +19,7 @@ spring:
           enabled: true
     routes:
       - id: istudy-note
-        uri: lb://istudy-note
+        url: lb://istudy-note
         predicates:
           - Path=/api/note/**
         filters:
@@ -27,19 +27,19 @@ spring:
           # 此处配置去掉 1 个路径前缀，再配置上面的 Path=/api/**，就能按照 http://localhost:9000/api/** 的方式访问了
           - StripPrefix=1
       - id: istudy-room
-        uri: lb://istudy-room
+        url: lb://istudy-room
         predicates:
           - Path=/api/room
         filters:
           - StripPrefix=1
       - id: istudy-user
-          uri: lb://istudy-user
+          url: lb://istudy-user
           predicates:
             - Path=/api/user
           filters:
             - StripPrefix=1
       - id: istudy-reservation
-          uri: lb://istudy-reservation
+          url: lb://istudy-reservation
           predicates:
             - Path=/api/reservation
           filters:

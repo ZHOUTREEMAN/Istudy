@@ -66,7 +66,7 @@ public class AdminServiceImpl implements AdminService {
     public Admin update(Admin admin) {
         admin.setLastUpdateTime(new Date());
         this.adminDao.update(admin);
-        return this.queryById(admin.getId());
+        return this.queryById(admin.getAdminNo());
     }
 
     /**

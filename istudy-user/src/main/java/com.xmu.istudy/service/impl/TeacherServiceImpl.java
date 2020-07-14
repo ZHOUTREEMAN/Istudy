@@ -66,7 +66,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher update(Teacher teacher) {
         teacher.setLastUpdateTime(new Date());
         this.teacherDao.update(teacher);
-        return this.queryById(teacher.getId());
+        return this.queryById(teacher.getTeacherNo());
     }
 
     /**
