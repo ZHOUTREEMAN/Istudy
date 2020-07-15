@@ -10,6 +10,7 @@ import com.xmu.istudy.service.SeatService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class SeatController extends ApiController {
      * @return 所有数据
      */
     @GetMapping
-    public R selectAll(Page<Seat> page, Seat seat) {
+    public R selectAll(HttpServletRequest request, Page<Seat> page, Seat seat) {
         return success(this.seatService.page(page, new QueryWrapper<>(seat)));
     }
 
@@ -47,7 +48,7 @@ public class SeatController extends ApiController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public R selectOne(@PathVariable Serializable id) {
+    public R selectOne(HttpServletRequest request,@PathVariable Serializable id) {
         return success(this.seatService.getById(id));
     }
 
@@ -58,7 +59,7 @@ public class SeatController extends ApiController {
      * @return 新增结果
      */
     @PostMapping
-    public R insert(@RequestBody Seat seat) {
+    public R insert(HttpServletRequest request,@RequestBody Seat seat) {
         return success(this.seatService.save(seat));
     }
 
@@ -69,7 +70,7 @@ public class SeatController extends ApiController {
      * @return 修改结果
      */
     @PutMapping
-    public R update(@RequestBody Seat seat) {
+    public R update(HttpServletRequest request,@RequestBody Seat seat) {
         return success(this.seatService.updateById(seat));
     }
 
@@ -80,7 +81,7 @@ public class SeatController extends ApiController {
      * @return 删除结果
      */
     @DeleteMapping
-    public R delete(@RequestParam("idList") List<Long> idList) {
+    public R delete(HttpServletRequest request,@RequestParam("idList") List<Long> idList) {
         return success(this.seatService.removeByIds(idList));
     }
 }

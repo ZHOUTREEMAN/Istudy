@@ -1,14 +1,9 @@
 package com.xmu.istudy.controller;
 
-
 import com.xmu.istudy.entity.Reservation;
-import com.xmu.istudy.entity.Room;
-import com.xmu.istudy.entity.Seat;
 import com.xmu.istudy.service.ReservationService;
-import com.xmu.istudy.service.RoomFeign;
 import com.xmu.istudy.util.JwtUtils;
 import com.xmu.istudy.util.ResponseUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,20 +14,16 @@ import java.util.Date;
  * (Reservation)表控制层
  *
  * @author makejava
- * @since 2020-07-14 02:11:36
+ * @since 2020-07-15 03:33:41
  */
 @RestController
-@RequestMapping("/reservation")
+@RequestMapping("reservation")
 public class ReservationController {
     /**
      * 服务对象
      */
     @Resource
     private ReservationService reservationService;
-    @Autowired
-    private RoomFeign roomFeign;
-
-
 
     /**
      * 通过主键查询单条数据
@@ -40,8 +31,8 @@ public class ReservationController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("selectOne")
-    public Reservation selectOne(Long id) {
+    @GetMapping("selectOne/{id}")
+    public Reservation selectOne(@PathVariable Long id) {
         return this.reservationService.queryById(id);
     }
 
@@ -55,18 +46,16 @@ public class ReservationController {
     public Object newReservation(HttpServletRequest request, @RequestBody Reservation reservation){
         if(JwtUtils.ifauthz(request,"admin")||JwtUtils.ifauthz(request,"teacher")||JwtUtils.ifauthz(request,"student"))
         {
-            /*该房间是否可用*/
+            /*//该房间是否可用
             Room targetRoom = roomFeign.getRoomById(reservation.getRoomId());
             if (targetRoom==null||targetRoom.getStatus()!=1){
                 return ResponseUtil.badArgument();
             }
-            /*判断该座位是否可用*/
+            //判断该座位是否可用
             Seat targetSeat = roomFeign.selectOne(reservation.getSeatId());
             if (targetSeat==null||targetSeat.getStatus()!=1){
                 return ResponseUtil.badArgument();
-            }
-
-            /*TODO 判断该座位在该时间段是否可用*/
+            }*/
 
             Reservation result=reservationService.insert(reservation);
             if(null==result) {
@@ -113,8 +102,8 @@ public class ReservationController {
      */
     @GetMapping("/admin/list")
     public Object queryAllReservations(HttpServletRequest request,
-            @RequestParam(defaultValue = "1") Integer page,
-            @RequestParam(defaultValue = "10") Integer limit){
+                                       @RequestParam(defaultValue = "1") Integer page,
+                                       @RequestParam(defaultValue = "10") Integer limit){
         if(JwtUtils.ifauthz(request,"admin")) {
             return ResponseUtil.ok(reservationService.queryAllByLimit(page, limit));
         }
@@ -169,5 +158,4 @@ public class ReservationController {
             return ResponseUtil.ok(reservationService.update(example));
         }
     }
-
 }

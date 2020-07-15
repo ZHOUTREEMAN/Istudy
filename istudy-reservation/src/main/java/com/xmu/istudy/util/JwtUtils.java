@@ -80,7 +80,7 @@ public class JwtUtils {
         Claims claims = jwtUtils.parseJwt(token);
         //获取clamis
         String usertype = claims.getSubject();
-        if(type==usertype)
+        if(type.equals(usertype))
         {
             return true;
         }

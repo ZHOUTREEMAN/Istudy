@@ -1,7 +1,6 @@
 package com.xmu.istudy.service;
 
 import com.xmu.istudy.entity.Reservation;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -9,9 +8,8 @@ import java.util.List;
  * (Reservation)表服务接口
  *
  * @author makejava
- * @since 2020-07-14 02:11:36
+ * @since 2020-07-15 03:33:41
  */
-@Service
 public interface ReservationService {
 
     /**
@@ -23,6 +21,14 @@ public interface ReservationService {
     Reservation queryById(Long id);
 
     /**
+     * 通过实体作为筛选条件查询
+     *
+     * @param reservation 实例对象
+     * @return 对象列表
+     */
+    List<Reservation> queryAll(Reservation reservation);
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
@@ -30,15 +36,6 @@ public interface ReservationService {
      * @return 对象列表
      */
     List<Reservation> queryAllByLimit(int offset, int limit);
-
-
-    /**
-     * 通过实体作为筛选条件查询
-     *
-     * @param reservation 实例对象
-     * @return 对象列表
-     */
-    List<Reservation> queryAll(Reservation reservation);
 
     /**
      * 新增数据

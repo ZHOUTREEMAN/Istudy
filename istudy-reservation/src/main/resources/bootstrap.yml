@@ -15,7 +15,7 @@ spring:
 
 mybatis:
   #domain对象的包
-  type-aliases-package: com.xmu.istudy.entity
+  type-aliases-package: com.xmu.istudy.com.xmu.istudy.entity
   #mapper.xml所在的位置
   mapper-locations: classpath:mapper/*.xml
   configuration:

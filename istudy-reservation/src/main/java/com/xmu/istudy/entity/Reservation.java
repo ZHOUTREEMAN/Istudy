@@ -7,10 +7,10 @@ import java.util.Date;
  * (Reservation)实体类
  *
  * @author makejava
- * @since 2020-07-14 02:11:35
+ * @since 2020-07-15 03:33:41
  */
 public class Reservation implements Serializable {
-    private static final long serialVersionUID = -30029355847074344L;
+    private static final long serialVersionUID = -43821771834998537L;
 
     private Long id;
 
@@ -26,7 +26,6 @@ public class Reservation implements Serializable {
 
     private Date lastUpdateTime;
 
-    /*1-可用但未签到，2-过期未签到，3-已签到且未过期，4-已签到且已过期（预约时间已经结束）,5-已取消*/
     private int status;
 
 

@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -49,7 +47,7 @@ public class RoomController {
     @GetMapping("/roomList")
     public Object roomList(HttpServletRequest request,
                            @RequestParam(defaultValue = "1") Integer page,
-                           @RequestParam(defaultValue = "5") Integer limit){
+                           @RequestParam(defaultValue = "10") Integer limit){
         List<Room> roomList = roomService.queryAllByLimit(page,limit);
         if(roomList.isEmpty()){
             return ResponseUtil.getFail();
@@ -59,7 +57,7 @@ public class RoomController {
     }
 
     @GetMapping("/{roomId}")
-    public Object getRoomById(@PathVariable Long roomId){
+    public Object getRoomById(HttpServletRequest request,@PathVariable Long roomId){
         if(roomId<0){
             logger.debug("room id 参数不合法");
             return ResponseUtil.illegalParameter();
@@ -74,7 +72,7 @@ public class RoomController {
     }
 
     @GetMapping("/open")
-    public Object getOpenRooms(Room room){
+    public Object getOpenRooms(HttpServletRequest request,@RequestParam Room room){
         /*将room状态设为开放*/
         room.setStatus(1);
         List<Room> openRooms = roomService.queryAll(room);
@@ -82,25 +80,25 @@ public class RoomController {
     }
 
     @GetMapping("/close")
-    public Object getCloseRooms(Room room){
+    public Object getCloseRooms(HttpServletRequest request,@RequestParam Room room){
         room.setStatus(0);
         List<Room> closedRooms = roomService.queryAll(room);
         return ResponseUtil.ok(closedRooms);
     }
 
     @PostMapping("")
-    public Object addRoom(@RequestBody Room room){
-            Room newRoom = roomService.insert(room);
-            if(newRoom == null){
-                logger.debug("创建自习室失败");
-                return ResponseUtil.addFail();
-            }
-            else{
-                return ResponseUtil.ok(newRoom);
-            }
+    public Object addRoom(HttpServletRequest request,@RequestParam Room room){
+        Room newRoom = roomService.insert(room);
+        if(newRoom == null){
+            logger.debug("创建自习室失败");
+            return ResponseUtil.addFail();
         }
-     @DeleteMapping("/{roomId}")
-    public Object deleteRoom(@PathVariable Long roomId){
+        else{
+            return ResponseUtil.ok(newRoom);
+        }
+    }
+    @DeleteMapping("/{roomId}")
+    public Object deleteRoom(HttpServletRequest request, @PathVariable Long roomId){
         if (roomId<0){
             logger.debug("参数不合法");
             return ResponseUtil.illegalParameter();
@@ -112,10 +110,10 @@ public class RoomController {
             logger.debug("删除自习室失败");
             return ResponseUtil.deleteFail();
         }
-     }
+    }
 
-     @PutMapping("/{roomId}")
-    public Object updateRoom(@PathVariable Long roomId,@RequestBody Room room){
+    @PutMapping("/{roomId}")
+    public Object updateRoom(HttpServletRequest request,@PathVariable Long roomId,@RequestBody Room room){
         if(roomId<0){
             logger.debug("参数不合法");
             return ResponseUtil.illegalParameter();
@@ -132,5 +130,5 @@ public class RoomController {
         else {
             return ResponseUtil.ok(updatedRoom);
         }
-     }
     }
+}

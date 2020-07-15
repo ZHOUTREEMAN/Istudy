@@ -12,7 +12,7 @@ import java.util.List;
  * (Reservation)表服务实现类
  *
  * @author makejava
- * @since 2020-07-14 02:11:36
+ * @since 2020-07-15 03:33:41
  */
 @Service("reservationService")
 public class ReservationServiceImpl implements ReservationService {
@@ -31,6 +31,17 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     /**
+     * 通过实体作为筛选条件查询
+     *
+     * @param reservation 实例对象
+     * @return 对象列表
+     */
+    @Override
+    public List<Reservation> queryAll(Reservation reservation) {
+        return this.reservationDao.queryAll(reservation);
+    }
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
@@ -40,17 +51,6 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> queryAllByLimit(int offset, int limit) {
         return this.reservationDao.queryAllByLimit(offset, limit);
-    }
-
-    /**
-     * 通过实体作为筛选条件查询
-     *
-     * @param reservation 实例对象
-     * @return 对象列表
-     */
-    @Override
-    public List<Reservation> queryAll(Reservation reservation) {
-        return this.reservationDao.queryAll(reservation);
     }
 
     /**
